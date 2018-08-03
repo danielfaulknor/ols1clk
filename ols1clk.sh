@@ -1477,12 +1477,14 @@ echo "WebAdmin username is [admin], password is [$ADMINPASSWORD]." > $SERVER_ROO
 set_ols_password
 gen_selfsigned_cert
 
+if [ "x$MYSQLINSTALLED" != "x1" ] ; then
+    install_mysql
+else
+    test_mysql_password
+fi    
+
 if [ "x$INSTALLWORDPRESS" = "x1" ] ; then
-    if [ "x$MYSQLINSTALLED" != "x1" ] ; then
-        install_mysql
-    else
-        test_mysql_password
-    fi    
+
     
     if [ "x$WORDPRESSINSTALLED" != "x1" ] ; then
         install_wordpress
